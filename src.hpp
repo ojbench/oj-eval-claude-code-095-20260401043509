@@ -176,11 +176,13 @@ struct Cycle { // 轮换
         // TODO: 将轮换应用大小为size的permutation上，直接修改permutation指向的数组。保证size>=elements[i]。
         if (this->size == 0) return;
 
-        int last_value = permutation[elements[this->size - 1]];
-        for (size_t i = this->size - 1; i > 0; i--) {
-            permutation[elements[i]] = permutation[elements[i - 1]];
+        // Cycle means: elements[i] -> elements[(i+1) % size]
+        // So result[elements[i]] = original[elements[(i+1) % size]]
+        int last_value = permutation[elements[0]];
+        for (size_t i = 0; i + 1 < this->size; i++) {
+            permutation[elements[i]] = permutation[elements[i + 1]];
         }
-        permutation[elements[0]] = last_value;
+        permutation[elements[this->size - 1]] = last_value;
     }
 
     friend std::ostream& operator<<(std::ostream& os, const Cycle& c) {
