@@ -67,7 +67,7 @@ struct Permutation { // 置换
         // TODO: 返回两个置换的乘积，即this*other。保证this和other的大小相同。
         Permutation result(size);
         for (size_t i = 0; i < size; i++) {
-            result.mapping[i] = mapping[other.mapping[i]];
+            result.mapping[i] = other.mapping[mapping[i]];
         }
         return result;
     }
